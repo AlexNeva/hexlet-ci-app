@@ -1,0 +1,28 @@
+name: hexlet-setup
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make setup
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-dir
+          path: .
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+      - run: make test
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - run: make lint
