@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: build
+          name: build-dir
       - run: make test
   lint:
     runs-on: ubuntu-latest
